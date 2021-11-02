@@ -1,65 +1,71 @@
-//Tarea 1: strlen, strcpy, strcmp, strcat
+/*
+* Ordena palabras con metodología de quickSort
+* David Emmanuel Pérez
+* Progra
+*/
 
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-void PedirFrase(char frase[100]);
-void strlong(int*LONGITUD,int longitud, char frase[100]);
-void strcopy(char frase[100], char frase2[100], int LONGITUD);
-void strcomp(char frase[100]);
-void strconcat(char frase[100]);
+void quickSort( char[10][20], int, int);
+int partition( char[10][20], int, int);
 
-int main(void)
+void main()
 {
-  char frase[100],frase2[100];
-  int longitud,LONGITUD;
-
-  PedirFrase(frase);
-  strlong(&LONGITUD,longitud, frase);
-  strcopy(frase,frase2,LONGITUD);
-  strcomp(frase);
-  strconcat(frase);
-}
-
-void PedirFrase(char frase[100])
-{
-  printf("Introduzca una frase: \n");
-  gets(frase);
-}
-
-void strlong(int*LONGITUD,int longitud, char frase[100])
-{
+  char nombres[10][20];
   int i;
-  i=0;
-  *LONGITUD=0;
-  strlen(frase);
-  longitud=strlen(frase);
-  do
-  {
-    *LONGITUD=(*LONGITUD)+1;
-    i++;
-  } while(frase[i]!='\0');
+  printf("Ingrese una lista de nombres\n");
+  for(i = 0; i <= 9; ++i)
+    {
+      printf("nombre %2d:", i+1);
+      scanf("%s", nombres[i]);
+    }
 
-  //printf("strlen es %d \n", longitud); //strlen
-  printf("STRLONG ES %d \n", *LONGITUD); //mi funcion
+  quickSort(nombres, 0, 9);
+  printf("\n\nLista ordenada es:\n ");
+  for(i = 0; i <=9; ++i)
+    printf(" %s\n ", nombres[i]);
 }
 
-void strcopy(char frase[100], char frase2[100],int LONGITUD)
+
+void quickSort( char nombres[10][20], int l, int r)
 {
-  int i;
-  for(i=0;LONGITUD;i++)
-  {
-    frase2[i]=frase[i];
-  }
-  puts(frase2);
+  int j;
+  char med[20];
+  if(l<r)
+    { // divide and conquer
+      j = partition( nombres, l, r);
+      quickSort( nombres, l, j-1);
+      quickSort( nombres, j+1, r);
+    }
 }
 
-void strcomp(char frase[100])
+int partition( char a[10][20], int l, int r)
 {
+  char pivot[20];
+  int i, j;
+  char temp[20];
 
-}
+  strcpy(pivot,a[l]);
+  i = l;
+  j = r+1;
 
-void strconcat(char frase[100])
-{
-
+  while(1)
+    { do
+++i;
+      while((strcmp(a[i], pivot)<=0) && (i <= r));
+      do
+--j;
+      while(strcmp(a[j], pivot)> 0);
+      if(i >= j)
+break;
+      strcpy(temp, a[i]);
+      strcpy(a[i], a[j]);
+      strcpy(a[j], temp);
+    }
+ strcpy(temp, a[l]);
+ strcpy(a[l], a[j]);
+ strcpy(a[j], temp);
+  return j;
 }
