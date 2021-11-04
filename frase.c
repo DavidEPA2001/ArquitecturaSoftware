@@ -1,6 +1,6 @@
 /*
 * Ordena palabras con metodología de quickSort
-* David Emmanuel Pérez
+* David Emmanuel Pérez Avila
 * Progra
 */
 
@@ -18,7 +18,7 @@ void main()
   printf("Ingrese una lista de nombres\n");
   for(i = 0; i <= 9; ++i)
     {
-      printf("nombre %2d:", i+1);
+      printf("nombre %3d:", i+1);
       scanf("%s", nombres[i]);
     }
 
